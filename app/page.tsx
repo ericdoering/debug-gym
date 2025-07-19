@@ -5,7 +5,7 @@ export default function Home() {
    <>
     <main className='hero'>
       <div className='hero-img'>
-        <img alt='hero image' src='hero-img.jpeg' style={{ height: 150, width: 175}} />
+        <img alt='hero image' src='hero-img.jpeg' />
       </div>
       <div className='hero-login'>
         <Login />

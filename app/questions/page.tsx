@@ -3,17 +3,17 @@ import MDX from "@/components/MDX";
 import SideNav from "@/components/SideNav";
 
 export default function QuestionPage() {
-  const isViewer = true;
+  const isViewer = false;
 
   return (
     <>
       <main id="questions">
         <SideNav />
         {!isViewer && (
-          <Editor hello="world" isViewer={isViewer} />
+          <Editor isViewer={isViewer} />
         )}
         {isViewer && (
-          <MDX />
+          <MDX isViewer={isViewer} />
         )}
       </main>
     </>

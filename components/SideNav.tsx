@@ -1,8 +1,9 @@
 export default function SideNav () {
-    const questions = [] /* ["hello", "world"] */
+    const questions = ["hello", "world"] 
+    const showNav = false;
     return (
         <>
-            <section className={"nav"}>
+            <section className={"nav " + (showNav ? "" : "hidden-nav")}>
                 <h1 className="text-gradient">Debug Gym</h1>
                 <h6>Where Bugs Build Better Devs.</h6>
                 <div className="full-line"></div>

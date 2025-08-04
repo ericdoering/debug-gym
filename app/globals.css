@@ -185,6 +185,29 @@
   text-overflow: ellipsis;
 }
 
+.list-btn {
+  position: relative;
+}
+
+.list-btn:hover .delete-btn {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.list-btn:hover .delete-btn:hover {
+  color: #fa4343 ;
+}
+
+.delete-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 200ms;
+}
+
 .questions-container, 
 .mdx-container {
   display: flex;
@@ -200,6 +223,13 @@
   border: none;
   resize: none;
   background: none;
+}
+
+article >div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
 }
 
 

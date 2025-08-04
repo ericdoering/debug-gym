@@ -3,7 +3,7 @@ import MDX from "@/components/MDX";
 import SideNav from "@/components/SideNav";
 
 export default function QuestionPage() {
-  const isViewer = false;
+  const isViewer = true;
 
   return (
     <>

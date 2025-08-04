@@ -1,5 +1,5 @@
 export default function SideNav () {
-    const questions = ["hello", "world"] 
+    const questions = ["hello", "world"]; 
     const showNav = false;
     return (
         <>
@@ -16,10 +16,12 @@ export default function SideNav () {
                     <p>No Questions added yet.</p> :
                     questions.map((question, idx) => {
                         return (
-                            <button key={idx} className="card-button-secondary">
+                            <button key={idx} className="card-button-secondary list-btn">
                                 <p>{question}</p>
-                                <small>DATETIME</small>
-                                DELETE BUTTON ICON
+                                    <small>DATETIME</small>
+                                        <div className="delete-btn">
+                                            <i className="fa-solid fa-trash-can"></i>
+                                        </div>
                             </button>
                         )
                     })}

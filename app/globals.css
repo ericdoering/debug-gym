@@ -109,6 +109,9 @@
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   flex: 1;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .nav, 
@@ -257,7 +260,27 @@ article >div {
   }
 
 @media (min-width: 768px) {
-    
+    #questions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      flex: 1;
+    }
+
+    .nav {
+      position: relative;
+      max-width: unset;
+    }
+
+    .hidden-nav {
+      display: flex !important;
+    }
+
+    .menu {
+      display: none !important;
+    }
+
+    .questions-container, .mdx-container {
+      grid-column: span 2;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -267,5 +290,13 @@ article >div {
   
     .hero-img {
       grid-column: span 2 / span 2;
+    }
+
+    #questions {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .questions-container, .mdx-container {
+      grid-column: span 3;
     }
   }

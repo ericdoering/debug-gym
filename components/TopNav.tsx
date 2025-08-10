@@ -1,5 +1,5 @@
 export default function TopNav(props: { isViewer: unknown; }) {
-const { isViewer } = props
+const { isViewer, handleToggleViewer } = props
   return (
     <>
       <div className="questions-btn">
@@ -10,7 +10,7 @@ const { isViewer } = props
           <h6>Save</h6>
           <i className="fa-solid fa-floppy-disk"></i>
         </button>
-        <button className="card-button-secondary">
+        <button onClick={handleToggleViewer} className="card-button-secondary">
           {isViewer ? (
             <>
               <h6>Viewer</h6>

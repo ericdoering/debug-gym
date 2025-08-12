@@ -6,24 +6,28 @@ import SideNav from "@/components/SideNav";
 import { useState } from "react";
 
 export default function QuestionPage() {
-  const [isViewer, setIsViewer] = useState(true);
+  const [isViewer, setIsViewer] = useState(false);
   const [text, setText] = useState("")
+  const [showNav, setShowNav] = useState(false)
 
   function handleToggleViewer() {
-    console.log("IS VIEWER", isViewer)
     setIsViewer(!isViewer)
+  }
+
+  function handleToggleMenu() {
+    setShowNav(!showNav)
   }
 
 
   return (
     <>
       <main id="questions">
-        <SideNav />
+        <SideNav setShowNav={setShowNav} showNav={showNav} />
         {!isViewer && (
-          <Editor setText={setText} text={text} isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
+          <Editor handleToggleMenu={handleToggleMenu} setText={setText} text={text} isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
         )}
         {isViewer && (
-          <MDX text={text} isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
+          <MDX handleToggleMenu={handleToggleMenu} text={text} isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
         )}
       </main>
     </>

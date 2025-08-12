@@ -1,9 +1,9 @@
 export default function TopNav(props: { isViewer: unknown; }) {
-const { isViewer, handleToggleViewer } = props
+const { isViewer, handleToggleViewer, handleToggleMenu } = props
   return (
     <>
       <div className="questions-btn">
-        <button className="card-button-primary menu">
+        <button onClick={handleToggleMenu} className="card-button-primary menu">
           <i className="fa-solid fa-bars"></i>
         </button>
         <button className="card-button-secondary">

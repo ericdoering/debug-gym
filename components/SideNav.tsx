@@ -1,9 +1,25 @@
-export default function SideNav () {
+import { useEffect, useRef } from "react";
+
+export default function SideNav (props) {
     const questions = ["hello", "world"]; 
-    const showNav = false;
+    const { showNav, setShowNav } = props;
+    const ref = useRef();
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setShowNav(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [setShowNav]);
+
     return (
         <>
-            <section className={"nav " + (showNav ? "" : "hidden-nav")}>
+            <section ref={ref} className={"nav " + (showNav ? "" : "hidden-nav")}>
                 <h1 className="text-gradient">Debug Gym</h1>
                 <h6>Where Bugs Build Better Devs.</h6>
                 <div className="full-line"></div>

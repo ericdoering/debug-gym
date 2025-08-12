@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function QuestionPage() {
   const [isViewer, setIsViewer] = useState(true);
+  const [text, setText] = useState("")
 
   function handleToggleViewer() {
     console.log("IS VIEWER", isViewer)
@@ -19,10 +20,10 @@ export default function QuestionPage() {
       <main id="questions">
         <SideNav />
         {!isViewer && (
-          <Editor isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
+          <Editor setText={setText} text={text} isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
         )}
         {isViewer && (
-          <MDX isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
+          <MDX text={text} isViewer={isViewer} handleToggleViewer={handleToggleViewer} />
         )}
       </main>
     </>

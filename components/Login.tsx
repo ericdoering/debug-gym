@@ -1,4 +1,41 @@
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import { useState } from "react";
+
 export default function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isRegister, setIsRegister] = useState(false);
+    const [isAuthenticating, setIsAuthenticating] = useState(false);
+
+    const { login, signup } = useAuth();
+    const cantAuth = !email.includes('@') || password.length < 6;
+
+
+    async function handleAuthUser(){
+        if(cantAuth){
+            return
+        }
+        setIsAuthenticating(true)
+        try {
+            if(isRegister){
+                await signup(email, password)
+            }
+            else{
+                await login(email, password)
+            }
+        }
+        catch(err) {
+            console.log(err.message)
+        }
+        finally {
+            setIsAuthenticating(false)
+        }
+    };
+
+
+
     return (
         <>
             <div className='login-container'>
@@ -12,14 +49,14 @@ export default function Login() {
                 <h6>Sign In</h6>
                 <div>
                     <p>Email</p>
-                    <input type='text' placeholder='Enter your email' />
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} type='text' placeholder='Enter your email' />
                 </div>
                 <div>
                     <p>Password</p>
-                    <input type='password' placeholder='************' />
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='************' />
                 </div>
-                <button className='submit-btn'>
-                    <h6>Submit</h6>
+                <button onClick={handleAuthUser} disabled={cantAuth || isAuthenticating} className='submit-btn'>
+                    <h6>{isAuthenticating ? "Submitting..." : "Submit"}</h6>
                 </button>
                 <div className='secondary-btns-container'>
                     <button className='card-button-secondary'>

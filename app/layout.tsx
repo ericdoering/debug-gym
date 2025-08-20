@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import './fanta.css';
 import Head from "./head";
-import AuthProvider from "@/context/authContext";
+import AuthProvider from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Debug Gym",

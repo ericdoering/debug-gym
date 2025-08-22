@@ -1,38 +1,39 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isRegister, setIsRegister] = useState(false);
-    const [isAuthenticating, setIsAuthenticating] = useState(false);
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [isRegister, setIsRegister] = useState(false)
+    const [isAuthenticating, setIsAuthenticating] = useState(false)
 
-    const { login, signup } = useAuth();
-    const cantAuth = !email.includes('@') || password.length < 6;
+    const { login, signUp } = useAuth()
+    const router = useRouter()
 
+    const cantAuth = !email.includes('@') || password.length < 6
 
-    async function handleAuthUser(){
-        if(cantAuth){
+    async function handleAuthUser() {
+        if (cantAuth) {
             return
         }
         setIsAuthenticating(true)
+
         try {
-            if(isRegister){
-                await signup(email, password)
-            }
-            else{
+            if (isRegister) {
+                await signUp(email, password)
+            } else {
                 await login(email, password)
             }
-        }
-        catch(err) {
+            router.push('/questions')
+        } catch (err) {
             console.log(err.message)
-        }
-        finally {
+        } finally {
             setIsAuthenticating(false)
         }
-    };
+    }
 
 
 
@@ -45,28 +46,34 @@ export default function Login() {
                     coding challenges in your chosen stack! Whether you are a fresh student
                     or a seasoned senior developer. DebugGYM is the place to train!
                 </p>
-                <div className='full-line'></div>
-                <h6>Sign In</h6>
+                <div className="full-line"></div>
+                <h6>{isRegister ? 'Create an account' : 'Log in'}</h6>
                 <div>
                     <p>Email</p>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} type='text' placeholder='Enter your email' />
+                    <input value={email} onChange={(e) => {
+                        setEmail(e.target.value)
+                    }} type="text" placeholder="Enter your email address" />
                 </div>
                 <div>
                     <p>Password</p>
-                    <input value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='************' />
+                    <input value={password} onChange={(e) => {
+                        setPassword(e.target.value)
+                    }} type="password" placeholder="*******" />
                 </div>
-                <button onClick={handleAuthUser} disabled={cantAuth || isAuthenticating} className='submit-btn'>
-                    <h6>{isAuthenticating ? "Submitting..." : "Submit"}</h6>
+                <button onClick={handleAuthUser} disabled={cantAuth || isAuthenticating} className="submit-btn">
+                    <h6>{isAuthenticating ? 'Submitting...' : 'Submit'}</h6>
                 </button>
-                <div className='secondary-btns-container'>
-                    <button className='card-button-secondary'>
-                        <small>Login</small>
+                <div className="secondary-btns-container">
+                    <button onClick={() => {
+                        setIsRegister(!isRegister)
+                    }} className="card-button-secondary">
+                        <small>{isRegister ? 'Log in' : 'Sign up'}</small>
                     </button>
-                    <button className='card-button-secondary'>
-                        <small>Forgot Password?</small>
+                    <button className="card-button-secondary">
+                        <small>Forgot password?</small>
                     </button>
                 </div>
-                <div className='full-line'></div>
+                <div className="full-line"></div>
                 <footer>
                     <a target="_blank" href="https://github.com/ericdoering">
                         <img alt='profile-pic' src='https://avatars.githubusercontent.com/u/110167204?v=4' />
